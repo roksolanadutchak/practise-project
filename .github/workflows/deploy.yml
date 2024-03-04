@@ -20,6 +20,7 @@ jobs:
       - name: Run test
         run: npm test
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -28,3 +29,10 @@ jobs:
         run: npm ci
       - name: Run build
         run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: |
+            dist
+            package.json
